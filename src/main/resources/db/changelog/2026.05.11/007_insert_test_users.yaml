@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_007_insert_test_users
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "Иван Иванов"
+              - column:
+                  name: date_of_birth
+                  value: "1999-05-15"
+              - column:
+                  name: password
+                  value: "$2a$10$WTgKmR817jzalAeas.6lVOIiqPU2ONbBH93lPjpeajLGLxGqJEiem"
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "Петр Петров"
+              - column:
+                  name: date_of_birth
+                  value: "2001-08-22"
+              - column:
+                  name: password
+                  value: "$2a$10$WTgKmR817jzalAeas.6lVOIiqPU2ONbBH93lPjpeajLGLxGqJEiem"
+
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: "Семен Семенов"
+              - column:
+                  name: date_of_birth
+                  value: "2000-03-10"
+              - column:
+                  name: password
+                  value: "$2a$10$WTgKmR817jzalAeas.6lVOIiqPU2ONbBH93lPjpeajLGLxGqJEiem"
+
+# Пароль: admin

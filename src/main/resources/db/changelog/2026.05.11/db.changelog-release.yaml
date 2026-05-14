@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/2026.05.11/001_create_user_table.yaml
+  - include:
+      file: db/changelog/2026.05.11/002_create_account_table.yaml
+  - include:
+      file: db/changelog/2026.05.11/003_create_email_data_table.yaml
+  - include:
+      file: db/changelog/2026.05.11/004_create_phone_data_table.yaml
+  - include:
+      file: db/changelog/2026.05.11/005_create_indexes.yaml
+  - include:
+      file: db/changelog/2026.05.11/006_create_sequences.yaml
+  - include:
+      file: db/changelog/2026.05.11/007_insert_test_users.yaml
+  - include:
+      file: db/changelog/2026.05.11/008_insert_test_accounts.yaml
+  - include:
+      file: db/changelog/2026.05.11/009_insert_test_email_data.yaml
+  - include:
+      file: db/changelog/2026.05.11/010_insert_test_phone_data.yaml

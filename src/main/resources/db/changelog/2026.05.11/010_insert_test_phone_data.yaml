@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_010_insert_test_phone_data
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - insert:
+            tableName: phone_data
+            columns:
+              - column: { name: id, value: 1 }
+              - column: { name: user_id, value: 1 }
+              - column: { name: phone, value: "79008007060" }
+
+        - insert:
+            tableName: phone_data
+            columns:
+              - column: { name: id, value: 2 }
+              - column: { name: user_id, value: 2 }
+              - column: { name: phone, value: "79008007061" }
+
+        - insert:
+            tableName: phone_data
+            columns:
+              - column: { name: id, value: 3 }
+              - column: { name: user_id, value: 3 }
+              - column: { name: phone, value: "79008007062" }
