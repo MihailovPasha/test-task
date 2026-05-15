@@ -5,15 +5,14 @@ import org.test.dto.request.AddEmailRequest;
 import org.test.dto.request.AddPhoneRequest;
 import org.test.dto.request.UpdateEmailRequest;
 import org.test.dto.request.UpdatePhoneRequest;
+import org.test.dto.request.UserSearchRequest;
 import org.test.dto.response.PageResponseDto;
 import org.test.dto.response.UserResponseDto;
 import org.test.dto.response.UserSearchResponseDto;
-import java.time.LocalDate;
 
 public interface UserService {
     UserResponseDto getUserById(Long id);
-    PageResponseDto<UserSearchResponseDto> searchUsers
-            (LocalDate dateOfBirth, String phone, String name, String email, Pageable pageable);
+    PageResponseDto<UserSearchResponseDto> searchUsers(UserSearchRequest request, Pageable pageable);
     UserResponseDto addEmail(Long userId, AddEmailRequest request);
     UserResponseDto updateEmail(Long userId, Long emailId, UpdateEmailRequest request);
     UserResponseDto deleteEmail(Long userId, Long emailId);

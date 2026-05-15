@@ -25,7 +25,6 @@ import org.test.model.User;
 import org.test.repository.UserRepository;
 import org.test.util.UserAccessService;
 import org.test.service.UserService;
-import java.time.LocalDate;
 
 @Slf4j
 @Service
@@ -45,19 +44,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageResponseDto<UserSearchResponseDto> searchUsers(LocalDate dateOfBirth, String phone, String name,
-                                                              String email, Pageable pageable) {
-        UserSearchRequest request = new UserSearchRequest();
-
-        if (dateOfBirth != null) {
-            request.setDateOfBirth(dateOfBirth);
-        }
-        request.setPhone(phone);
-        request.setName(name);
-        request.setEmail(email);
-
+    public PageResponseDto<UserSearchResponseDto> searchUsers(UserSearchRequest request, Pageable pageable) {
         log.info("Поиск пользователей с критериями: {}", request);
-
         Page<User> users = userRepository.searchUsers(request, pageable);
         return userMapper.toPageResponseDto(users);
     }

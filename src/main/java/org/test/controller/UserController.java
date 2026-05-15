@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import org.test.dto.request.AddEmailRequest;
 import org.test.dto.request.AddPhoneRequest;
 import org.test.dto.request.UpdateEmailRequest;
 import org.test.dto.request.UpdatePhoneRequest;
+import org.test.dto.request.UserSearchRequest;
 import org.test.dto.response.PageResponseDto;
 import org.test.dto.response.UserResponseDto;
 import org.test.dto.response.UserSearchResponseDto;
@@ -46,7 +48,7 @@ public class UserController {
     @Operation(summary = "Поиск пользователей с фильтрацией и пагинацией")
     public ResponseEntity<PageResponseDto<UserSearchResponseDto>> searchUsers(
             @Parameter(description = "Дата рождения (фильтр: больше чем)")
-            @RequestParam(required = false) LocalDate dateOfBirth,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate dateOfBirth,
 
             @Parameter(description = "Телефон (100% совпадение)")
             @RequestParam(required = false) String phone,
@@ -69,13 +71,16 @@ public class UserController {
             @Parameter(description = "Направление сортировки (asc/desc)")
             @RequestParam(defaultValue = "asc", name = "direction") String direction) {
 
+        UserSearchRequest request = new UserSearchRequest();
+        request.setDateOfBirth(dateOfBirth);
+        request.setPhone(phone);
+        request.setName(name);
+        request.setEmail(email);
+
         Sort.Direction sortDirection = Sort.Direction.fromString(direction.toLowerCase());
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
 
-        PageResponseDto<UserSearchResponseDto> response =
-                userService.searchUsers(dateOfBirth, phone, name, email, pageable);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(userService.searchUsers(request, pageable));
     }
 
     @PostMapping("/email")

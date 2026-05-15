@@ -3,6 +3,7 @@ package org.test.service.impl;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.test.dto.request.TransferRequest;
 import org.test.dto.response.TransferResponseDto;
@@ -25,6 +26,7 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "users", allEntries = true)
     public TransferResponseDto transfer(Long fromUserId, TransferRequest request) {
         log.info("Старт перевода - от: {}, к: {}, сумма: {}",
                 fromUserId, request.getToUserId(), request.getValue());
@@ -33,11 +35,16 @@ public class TransferServiceImpl implements TransferService {
 
         validateTransfer(fromUserId, request);
 
-        Account fromAccount = accountRepository.findByUserId(fromUserId)
-                .orElseThrow(() -> new ResourceNotFoundException("Аккаунт отправителя не найден"));
+        Long firstUserId = fromUserId < request.getToUserId() ? fromUserId : request.getToUserId();
+        Long secondUserId = fromUserId < request.getToUserId() ? request.getToUserId() : fromUserId;
 
-        Account toAccount = accountRepository.findByUserId(request.getToUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("Аккаунт получателя не найден"));
+        Account firstAccount = accountRepository.findByUserId(firstUserId)
+                .orElseThrow(() -> new ResourceNotFoundException("Аккаунт не найден"));
+        Account secondAccount = accountRepository.findByUserId(secondUserId)
+                .orElseThrow(() -> new ResourceNotFoundException("Аккаунт не найден"));
+
+        Account fromAccount = fromUserId.equals(firstUserId) ? firstAccount : secondAccount;
+        Account toAccount = fromUserId.equals(firstUserId) ? secondAccount : firstAccount;
 
         if (fromAccount.getBalance().compareTo(request.getValue()) < 0) {
             throw new InsufficientFundsException(
