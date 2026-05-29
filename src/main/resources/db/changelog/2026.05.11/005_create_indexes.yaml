@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_005_create_indexes
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - createIndex:
+            tableName: users
+            indexName: idx_users_name
+            columns:
+              - column:
+                  name: name
+        - createIndex:
+            tableName: users
+            indexName: idx_users_date_of_birth
+            columns:
+              - column:
+                  name: date_of_birth
+        - createIndex:
+            tableName: email_data
+            indexName: idx_email_data_user_id
+            columns:
+              - column:
+                  name: user_id
+        - createIndex:
+            tableName: phone_data
+            indexName: idx_phone_data_user_id
+            columns:
+              - column:
+                  name: user_id

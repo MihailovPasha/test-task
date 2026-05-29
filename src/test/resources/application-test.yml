@@ -1,0 +1,15 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  cache:
+    type: none
+  liquibase:
+    enabled: true
+  sleuth:
+    redis:
+      enabled: false
+  zipkin:
+    compression:
+      enabled: false

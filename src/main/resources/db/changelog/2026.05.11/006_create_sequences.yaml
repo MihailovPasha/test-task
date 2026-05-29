@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_006_create_sequences
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - createSequence:
+            sequenceName: user_seq
+            startValue: 10
+            incrementBy: 1
+        - createSequence:
+            sequenceName: account_seq
+            startValue: 10
+            incrementBy: 1
+        - createSequence:
+            sequenceName: email_seq
+            startValue: 10
+            incrementBy: 1
+        - createSequence:
+            sequenceName: phone_seq
+            startValue: 10
+            incrementBy: 1

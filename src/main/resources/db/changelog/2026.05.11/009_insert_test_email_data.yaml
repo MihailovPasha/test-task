@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_009_insert_test_email_data
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - insert:
+            tableName: email_data
+            columns:
+              - column: { name: id, value: 1 }
+              - column: { name: user_id, value: 1 }
+              - column: { name: email, value: "ivan@mail.com" }
+
+        - insert:
+            tableName: email_data
+            columns:
+              - column: { name: id, value: 2 }
+              - column: { name: user_id, value: 2 }
+              - column: { name: email, value: "petr@mail.com" }
+
+        - insert:
+            tableName: email_data
+            columns:
+              - column: { name: id, value: 3 }
+              - column: { name: user_id, value: 3 }
+              - column: { name: email, value: "semen@mail.com" }

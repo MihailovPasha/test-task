@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2026.05.11_001_create_user_table
+      author: mihailov.pashka@yandex.ru
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_of_birth
+                  type: DATE
+              - column:
+                  name: password
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
